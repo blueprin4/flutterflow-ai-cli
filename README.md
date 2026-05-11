@@ -1,9 +1,10 @@
 # FlutterFlow AI CLI Field Notes
 
-Version: 0.1.0  
+Version: 0.1.1
 Updated: 2026-05-11
 
 Change log:
+- 0.1.1 - Tightened wording around native-first guidance, component edits, and schema refresh cautions.
 - 0.1.0 - Initial public release with a Codex skill and battle-tested FlutterFlow AI CLI notes.
 
 This repo contains a community-oriented Codex skill for working with FlutterFlow AI CLI workspaces. It is intentionally limited to reusable workflow guidance and sanitized field notes.
@@ -25,4 +26,3 @@ cp -R ff-cli "$CODEX_HOME/skills/ff-cli"
 ```
 
 Then start a Codex thread and ask it to use the `ff-cli` skill when working on FlutterFlow AI CLI projects.
-

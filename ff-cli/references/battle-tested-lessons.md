@@ -1,9 +1,10 @@
 # Battle-Tested FlutterFlow AI CLI Lessons
 
-Version: 0.1.0  
+Version: 0.1.1
 Updated: 2026-05-11
 
 Change log:
+- 0.1.1 - Tightened native-first, component-edit, and schema-refresh guidance.
 - 0.1.0 - Initial public release with sanitized lessons for existing Supabase projects, action-block arguments, and generated-code verification.
 
 ## Existing Supabase Projects
@@ -86,9 +87,11 @@ Weak fit:
 
 ## Native First
 
-Prefer FlutterFlow-native surfaces before custom code:
+Prefer FlutterFlow-native surfaces before custom code. This is partly a maintainability preference and partly a response to observed CLI failure modes: native resources remain editable in FlutterFlow UI, and they avoid several brittle generated-code and raw-proto paths.
+
+Use these surfaces first:
 - API Calls for REST/RPC functions.
-- Supabase queries/mutations where supported.
+- Supabase queries/mutations where the CLI validates cleanly; otherwise prefer FlutterFlow UI wiring, API/RPC calls, or action-block wrappers.
 - Built-in formatters for currency/date/number display.
 - Action blocks for reusable visible workflows.
 - App/page state and component params for editor-visible state.
@@ -161,11 +164,16 @@ dart analyze lib/custom_code/actions/<action_file>.dart
 
 ## Components
 
-- Page edits cannot reliably reach inside component internals.
-- Prefer editing component params, page-level wrappers, or provide FlutterFlow UI steps for component internals.
-- If a component has to be changed with CLI, inspect it directly with `--component`.
+- Do not assume a page edit can safely reach inside a component instance and change that component's internals.
+- Direct component edits can work. Inspect the component directly with `flutterflow ai inspect <project-id> --component <ComponentName> --dsl-json`, then use `app.editComponent(...)` for component internals.
+- From a page, prefer editing the component instance params, page-level wrappers, visibility, or placement.
+- If the intended change must remain easy to maintain in FlutterFlow UI and the CLI path is fragile, provide FlutterFlow UI steps instead of forcing raw proto edits.
 
-## Schema Update Warning
+## Schema Refresh And Validation Regressions
 
-Avoid using FlutterFlow Supabase "Update Schema" casually. It can break widget-to-table bindings for CLI validation. If metadata is corrupted, initialize a fresh workspace against the project and compare context.
+The connected Supabase metadata pattern fixes the known bare `app.supabase(...)` validation failure. That is separate from schema-refresh risk.
 
+If FlutterFlow Supabase "Update Schema" or another metadata refresh is followed by unexpected validation failures in existing table bindings, treat it as a metadata/context regression until proven otherwise:
+- Run `flutterflow ai refresh-context <project-id>`.
+- Compare a fresh workspace against the existing workspace.
+- Inspect generated Supabase table classes and the relevant `dsl_json/` before rewriting working UI.

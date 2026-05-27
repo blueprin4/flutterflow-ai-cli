@@ -1,7 +1,13 @@
 # Changelog
 
-Version: 0.1.1
-Updated: 2026-05-11
+Version: 0.2.0
+Updated: 2026-05-27
+
+## 0.2.0 - 2026-05-27
+
+- Added repeatable sync guidance for keeping the default `dsl/edit.dart` limited to custom-code sync.
+- Added guidance to section `dsl/edit.dart` by custom functions, Code Files/classes, custom actions, metadata, and shared helpers.
+- Added a post-push prompt rule: after successful UI/page/component migration pushes, ask whether to clear or move one-off mutations out of the default `dsl/edit.dart` and warn that leaving them can overwrite live FlutterFlow server/UI changes on later pushes.
 
 ## 0.1.1 - 2026-05-11
 

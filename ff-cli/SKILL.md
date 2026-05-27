@@ -5,10 +5,11 @@ description: Work with FlutterFlow AI CLI workspaces and existing FlutterFlow pr
 
 # FlutterFlow AI CLI
 
-Version: 0.1.0  
-Updated: 2026-05-11
+Version: 0.2.0
+Updated: 2026-05-27
 
 Change log:
+- 0.2.0 - Added repeatable sync guidance for keeping default `dsl/edit.dart` limited to custom-code sync, sectioning it by type, and asking before retaining one-off UI/page/component migrations after a successful push.
 - 0.1.0 - Initial public release with core workflow rules and pointers to battle-tested lessons.
 
 ## Core Rules
@@ -41,6 +42,17 @@ Change log:
    flutterflow ai refresh-context <project-id>
    ```
 6. After refresh, inspect `generated_code/` to confirm FlutterFlow generated what was intended.
+
+## Repeatable Sync And One-Off Migrations
+
+- Keep the default `ai-workspace/dsl/edit.dart` limited to safe repeatable sync work, especially repo-owned custom code, custom action metadata, custom functions, and Code Files/classes.
+- Section the default `dsl/edit.dart` by sync type so stale mutations are easy to spot. Prefer a shape like `syncCustomFunctions(project)`, `syncCodeFiles(project)`, `syncCustomActions(project)`, `syncCustomActionMetadata(project)`, then shared helpers.
+- After a successful UI/page/component migration push, ask the user whether to clear or move those one-off mutations out of the default `dsl/edit.dart`. Explain that if they are left in place, a later unrelated push can replay them and overwrite live FlutterFlow server changes, FlutterFlow UI edits, or another thread's page/component updates.
+- Do not leave page/component/layout/action-chain migrations in the default `dsl/edit.dart` after they have been pushed successfully unless the user explicitly wants that migration to remain repeatable.
+- Put one-off FlutterFlow UI/page/component migrations in separate dated files under `ai-workspace/dsl/migrations/`, and run them explicitly only for that task.
+- Before any unrelated custom-code push, check `dsl/edit.dart` for stale `editPage`, `editComponent`, raw `findPage(...)`/`findComponent(...)` mutation blocks, page state migrations, layout changes, action-chain rewiring, or old node-key repairs. Remove, move, or gate them unless the current task is intentionally changing that UI.
+- `flutterflow ai refresh-context` updates context/generated snapshots, but it does not update or clean `dsl/edit.dart`.
+- When another thread or the FlutterFlow UI changes a page/component, do not assume refreshing this workspace makes `dsl/edit.dart` safe. Inspect and prune stale page/component mutations before pushing.
 
 ## API Calls
 
@@ -78,4 +90,3 @@ Use FlutterFlow's API Calls library as the editable integration surface:
 ## More Details
 
 Read `references/battle-tested-lessons.md` when working with existing Supabase projects, custom code upserts, raw proto action wiring, component limitations, schema corruption recovery, or other fragile FlutterFlow AI CLI behavior.
-

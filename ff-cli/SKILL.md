@@ -5,10 +5,11 @@ description: Work with FlutterFlow AI CLI workspaces and existing FlutterFlow pr
 
 # FlutterFlow AI CLI
 
-Version: 0.2.0
-Updated: 2026-05-27
+Version: 0.2.1
+Updated: 2026-06-02
 
 Change log:
+- 0.2.1 - Added a battle-tested pointer for action-chain and grouped local-state update wiring.
 - 0.2.0 - Added repeatable sync guidance for keeping default `dsl/edit.dart` limited to custom-code sync, sectioning it by type, and asking before retaining one-off UI/page/component migrations after a successful push.
 - 0.1.0 - Initial public release with core workflow rules and pointers to battle-tested lessons.
 
@@ -21,6 +22,7 @@ Change log:
 - When custom code is unavoidable, keep it narrow and non-visual unless the user explicitly approves a custom widget.
 - Do not patch schema dumps. Use dumps only as reference and provide standalone SQL files for proposed DB changes.
 - For existing Supabase projects, read `references/battle-tested-lessons.md` before using `app.supabase`, `app.table`, `Postgres*` actions, or action-block wrappers for Supabase mutations.
+- For action-chain cleanup, many-field page/component state assignments, or raw local-state update mutations, read the Action Wiring section in `references/battle-tested-lessons.md`.
 
 ## Edit Workflow
 
@@ -89,4 +91,4 @@ Use FlutterFlow's API Calls library as the editable integration surface:
 
 ## More Details
 
-Read `references/battle-tested-lessons.md` when working with existing Supabase projects, custom code upserts, raw proto action wiring, component limitations, schema corruption recovery, or other fragile FlutterFlow AI CLI behavior.
+Read `references/battle-tested-lessons.md` when working with existing Supabase projects, action wiring, many-field state updates, custom code upserts, raw proto action wiring, component limitations, schema corruption recovery, or other fragile FlutterFlow AI CLI behavior.

@@ -1,7 +1,13 @@
 # Changelog
 
-Version: 0.2.0
-Updated: 2026-05-27
+Version: 0.2.1
+Updated: 2026-06-02
+
+## 0.2.1 - 2026-06-02
+
+- Added action-wiring guidance for grouping many page/component state assignments into one FlutterFlow local-state update action.
+- Added guidance to preserve designer-built layouts and non-state follow-up actions when cleaning up existing action chains.
+- Added generated Dart verification expectations after grouping local-state updates.
 
 ## 0.2.0 - 2026-05-27
 

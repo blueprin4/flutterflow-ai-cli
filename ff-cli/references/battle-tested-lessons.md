@@ -1,9 +1,10 @@
 # Battle-Tested FlutterFlow AI CLI Lessons
 
-Version: 0.1.1
-Updated: 2026-05-11
+Version: 0.2.1
+Updated: 2026-06-02
 
 Change log:
+- 0.2.1 - Added action-wiring guidance for grouped local-state updates and generated Dart verification.
 - 0.1.1 - Tightened native-first, component-edit, and schema-refresh guidance.
 - 0.1.0 - Initial public release with sanitized lessons for existing Supabase projects, action-block arguments, and generated-code verification.
 
@@ -68,6 +69,13 @@ An existing FlutterFlow project can already generate valid Supabase table classe
   ```
 - After pushing an action-block call fix, run `flutterflow ai refresh-context <project-id>` and inspect generated Dart. The button should call the block with named args, for example `recordRow: widget.recordRow`.
 - Query flows that must populate page-local state remain fragile through CLI. Prefer FlutterFlow UI, an existing API/RPC call, or isolate in a throwaway workspace before pushing.
+
+## Action Wiring
+
+- The public DSL helper `SetState('field', value)` compiles to one FlutterFlow local-state action per field. Do not use a long sequence of individual `SetState` actions when the intent is one grouped page/component state update.
+- For buttons or handlers that need to assign many page-state fields at once, prefer a single FlutterFlow local-state update action with multiple field updates. If the typed DSL cannot express it, use a narrow `app.raw()` mutation against the existing action chain: merge consecutive `FFAction.localStateUpdate.updates`, dedupe repeated fields, and preserve non-state follow-up actions such as tab/page-view jumps.
+- When cleaning up an existing designer-built action chain, mutate only the action chain. Do not rebuild or replace the surrounding page layout just to wire state updates; preserve designer choices such as `Wrap` vs `ListView`.
+- After grouping state updates, run `flutterflow ai validate`, push, `flutterflow ai refresh-context`, and inspect generated Dart. The expected generated shape is one block of model assignments followed by the original follow-up action, not repeated `safeSetState(() {})` after every field.
 
 ## DSL Capabilities
 

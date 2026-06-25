@@ -1,6 +1,6 @@
 ---
 name: ff-cli
-description: Work with FlutterFlow AI CLI workspaces and existing FlutterFlow projects. Use when Codex needs to inspect FlutterFlow pages/components, edit dsl/edit.dart, use generated_code as read-only runtime truth, wire native FlutterFlow actions/API calls/Supabase queries, validate and push with flutterflow ai, or avoid non-editable generated Dart/custom-widget changes.
+description: Work with FlutterFlow AI CLI workspaces and existing FlutterFlow projects. Use when you need to inspect FlutterFlow pages/components, edit dsl/edit.dart, use generated_code as read-only runtime truth, wire native FlutterFlow actions/API calls/Supabase queries, validate and push with flutterflow ai, or avoid non-editable generated Dart/custom-widget changes.
 ---
 
 # FlutterFlow AI CLI

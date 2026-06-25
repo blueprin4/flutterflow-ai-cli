@@ -1,9 +1,10 @@
 # FlutterFlow AI CLI Field Notes
 
-Version: 0.2.2
+Version: 0.2.3
 Updated: 2026-06-25
 
 Change log:
+- 0.2.3 - Added a custom-code artifact-type note (class/enum vs widget storage; widgets push via the SDK, not UI-only).
 - 0.2.2 - Added a version-history diffing note (refresh-context loaded-version scope; non-destructive restore and bisecting).
 - 0.2.1 - Added action-wiring guidance for grouped local-state updates and generated Dart verification.
 - 0.2.0 - Added repeatable `dsl/edit.dart` sync guidance and post-push cleanup prompts for one-off UI/page/component migrations.

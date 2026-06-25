@@ -1,7 +1,12 @@
 # Changelog
 
-Version: 0.2.2
+Version: 0.2.3
 Updated: 2026-06-25
+
+## 0.2.3 - 2026-06-25
+
+- Added a "Custom Code Artifact Types And Storage" note: custom classes/enums attach to an `FFCustomCodeFile` and push cleanly via `updateCustomClass`/`updateCustomEnum`, while custom widgets store code on `FFWidgetClass`.
+- Clarified that custom widgets are still pushed via the SDK (`addCustomWidget`/`updateCustomWidget`), not a UI-only edit, with the UI editor as a fallback only if an update silently does not take.
 
 ## 0.2.2 - 2026-06-25
 

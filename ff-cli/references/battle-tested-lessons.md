@@ -1,9 +1,10 @@
 # Battle-Tested FlutterFlow AI CLI Lessons
 
-Version: 0.2.2
+Version: 0.2.3
 Updated: 2026-06-25
 
 Change log:
+- 0.2.3 - Added a custom-code artifact-type note: classes/enums vs widgets store code differently; widgets are not a UI-only edit.
 - 0.2.2 - Added a version-history diffing note: `refresh-context` reads only the currently-loaded version, and restoring a version is non-destructive.
 - 0.2.1 - Added action-wiring guidance for grouped local-state updates and generated Dart verification.
 - 0.1.1 - Tightened native-first, component-edit, and schema-refresh guidance.
@@ -121,6 +122,14 @@ if (existing == null) {
 ```
 
 Same idea applies to `findCustomFunction` / `addCustomFunction` / `updateCustomFunction` and widgets.
+
+## Custom Code Artifact Types And Storage
+
+- All custom-code artifacts push through the SDK (`add*` / `update*`, or `app.customFunction` / `customAction` / `customWidget` / `customClass` / `customEnum`). The SDK is the canonical add/update/remove path; the documented non-goals have no widget carve-out, so custom widgets are not a UI-only edit.
+- Storage differs by kind, which matters when an "update didn't take":
+  - Custom **classes / enums** attach to the containing `FFCustomCodeFile`. Push and update them with `updateCustomClass` / `updateCustomEnum` in `dsl/edit.dart`, then `flutterflow ai run`. This is reliable. Do not route a custom class through the FlutterFlow UI just because it is "custom code"; that is a step backward from a clean CLI push.
+  - Custom **widgets** store their code on `FFWidgetClass` (filed under the widgets folder), not on an `FFCustomCodeFile`. `addCustomWidget` / `updateCustomWidget` are still the documented path. If an *update* to an existing widget's code silently does not take, treat it as an SDK edge case tied to the `FFWidgetClass` storage path: fall back to the UI custom-widget code editor and report it.
+- After pushing a custom class that adds a new method, the IDE must Validate -> Parse -> Save before the new method is bindable. That is an IDE re-parse step, not code entry; the code itself is pushed by the CLI.
 
 ## Raw Action Wiring
 

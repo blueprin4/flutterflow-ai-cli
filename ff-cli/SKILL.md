@@ -5,10 +5,11 @@ description: Work with FlutterFlow AI CLI workspaces and existing FlutterFlow pr
 
 # FlutterFlow AI CLI
 
-Version: 0.2.1
-Updated: 2026-06-02
+Version: 0.2.2
+Updated: 2026-06-25
 
 Change log:
+- 0.2.2 - Added a battle-tested pointer for version-history diffing (refresh-context loaded-version scope; non-destructive restore).
 - 0.2.1 - Added a battle-tested pointer for action-chain and grouped local-state update wiring.
 - 0.2.0 - Added repeatable sync guidance for keeping default `dsl/edit.dart` limited to custom-code sync, sectioning it by type, and asking before retaining one-off UI/page/component migrations after a successful push.
 - 0.1.0 - Initial public release with core workflow rules and pointers to battle-tested lessons.
@@ -91,4 +92,4 @@ Use FlutterFlow's API Calls library as the editable integration surface:
 
 ## More Details
 
-Read `references/battle-tested-lessons.md` when working with existing Supabase projects, action wiring, many-field state updates, custom code upserts, raw proto action wiring, component limitations, schema corruption recovery, or other fragile FlutterFlow AI CLI behavior.
+Read `references/battle-tested-lessons.md` when working with existing Supabase projects, action wiring, many-field state updates, custom code upserts, raw proto action wiring, component limitations, schema corruption recovery, version-history diffing, or other fragile FlutterFlow AI CLI behavior.

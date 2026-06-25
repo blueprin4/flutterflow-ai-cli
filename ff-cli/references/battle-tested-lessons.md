@@ -1,9 +1,10 @@
 # Battle-Tested FlutterFlow AI CLI Lessons
 
-Version: 0.2.1
-Updated: 2026-06-02
+Version: 0.2.2
+Updated: 2026-06-25
 
 Change log:
+- 0.2.2 - Added a version-history diffing note: `refresh-context` reads only the currently-loaded version, and restoring a version is non-destructive.
 - 0.2.1 - Added action-wiring guidance for grouped local-state updates and generated Dart verification.
 - 0.1.1 - Tightened native-first, component-edit, and schema-refresh guidance.
 - 0.1.0 - Initial public release with sanitized lessons for existing Supabase projects, action-block arguments, and generated-code verification.
@@ -145,6 +146,11 @@ Generated API call code shows the group class, call class, params, headers, auth
 - Never edit `generated_code/` directly.
 - Use generated Dart to verify actual constraints, nullability, action output names, API call code, and custom action signatures.
 - After each push, run `flutterflow ai refresh-context <project-id>`.
+
+## Version History And Diffing
+
+- `flutterflow ai refresh-context` captures only the **currently-loaded** project version. To diff two FlutterFlow commits, restore one, run `refresh-context`, and snapshot `generated_code/`; then restore the other, run `refresh-context`, and diff against the snapshot.
+- Restoring a FlutterFlow version is non-destructive: it makes a copy of the chosen version the new current one and leaves newer commits in history. You can bisect a regression freely (restore the midpoint, test, halve) without losing work. Watch for large commits hidden behind a small message; they can carry collateral action-chain edits unrelated to the title.
 
 ## Validation And Push
 

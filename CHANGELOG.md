@@ -1,7 +1,12 @@
 # Changelog
 
-Version: 0.2.1
-Updated: 2026-06-02
+Version: 0.2.2
+Updated: 2026-06-25
+
+## 0.2.2 - 2026-06-25
+
+- Added a "Version History And Diffing" note: `flutterflow ai refresh-context` captures only the currently-loaded project version, so diffing two commits requires restore + refresh on each.
+- Documented that restoring a FlutterFlow version is non-destructive (newer commits stay in history), enabling free bisecting of regressions.
 
 ## 0.2.1 - 2026-06-02
 
